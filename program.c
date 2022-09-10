@@ -150,14 +150,18 @@ int get_paragraph(paragraph_t cur_paragraph, int *word_count, int cur_para_limit
         // printf("paragraph: %s\n", cur_paragraph);
 
         cur_word_index += (strlen(cur_word) + 1);
-        *(cur_paragraph + cur_word_index - 1) = ' ';
 
         *word_count += 1;
         if (cur_code == PARA_END)
         {
 
-            *(cur_paragraph + cur_word_index) = '\0';
+            *(cur_paragraph + cur_word_index - 1) = '\0';
             return PARA_END;
+        }
+        else
+        {
+
+            *(cur_paragraph + cur_word_index - 1) = ' ';
         }
         // printf("word: %s\n", cur_word);
     }

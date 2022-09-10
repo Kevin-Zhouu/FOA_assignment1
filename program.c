@@ -147,8 +147,8 @@ int is_keyword(char word[])
     for (int i = 0; i <= num_keywords; i++)
     {
 
-        printf("Keyword: %s\n", keywords[i]);
-        if (strcmp(word, keywords[i]) == 0)
+        printf("Keyword: %s\n", *(keywords + i));
+        if (strcmp(word, *(keywords + i)) == 0)
         {
             return TRUE;
         }

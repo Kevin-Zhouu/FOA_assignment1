@@ -148,7 +148,7 @@ int is_keyword(char word[])
     {
 
         printf("Comparing: keyword: %s\n with \n%s\n", *(keywords + i), word);
-        if (strcmp(word, *(keywords + i)) == 0)
+        if (strcicmp(word, *(keywords + i)) == 0)
         {
 
             return TRUE;
@@ -157,6 +157,16 @@ int is_keyword(char word[])
 
     return FALSE;
     // return TRUE;
+}
+// from StackOverFlow
+int strcicmp(char const *a, char const *b)
+{
+    for (;; a++, b++)
+    {
+        int d = tolower((unsigned char)*a) - tolower((unsigned char)*b);
+        if (d != 0 || !*a)
+            return d;
+    }
 }
 int get_paragraph(paragraph_t cur_paragraph, int *word_count, int cur_para_limit)
 {

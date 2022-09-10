@@ -151,7 +151,7 @@ int get_paragraph(paragraph_t cur_paragraph, int *word_count, int cur_para_limit
             printf("para end");
             return PARA_END;
         }
-        else if (cur_code != EOF)
+        else if (cur_code == WORD_FND)
         {
             printf("Word found: %s\n", cur_word);
             // cur_paragraph = (strcpy(cur_paragraph, cur_word) + 1);

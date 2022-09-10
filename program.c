@@ -179,7 +179,7 @@ int get_paragraph(paragraph_t cur_paragraph, int *word_count, int cur_para_limit
 int get_word(word_t cur_word, int cur_word_limit)
 {
 
-    printf("reading:\n");
+    // printf("reading:\n");
     int cur_char;
     // int new_line_count = 0;
     /* first, skip over any non alphanumerics */

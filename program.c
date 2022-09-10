@@ -137,7 +137,7 @@ int get_paragraph(paragraph_t cur_paragraph, int *word_count, int cur_para_limit
 
     word_t cur_word;
     int cur_code = 0;
-    int cur_word_index = 0;
+    // int cur_word_index = 0;
     while ((cur_code = get_word(cur_word, MAX_WORD_LEN)) != EOF)
     {
 
@@ -149,7 +149,7 @@ int get_paragraph(paragraph_t cur_paragraph, int *word_count, int cur_para_limit
         }
         else
         {
-            printf("index:%d Word found: %s\n", cur_word_index, cur_word);
+            printf("Word found: %s\n", cur_word);
             strcpy(cur_paragraph, cur_word);
             // cur_paragraph[cur_word_index + 1] = ' ';
 
@@ -161,7 +161,7 @@ int get_paragraph(paragraph_t cur_paragraph, int *word_count, int cur_para_limit
 
             *word_count += 1;
 
-            *cur_paragraph = ' ';
+            *(cur_paragraph - 1) = ' ';
         }
         // printf("word: %s\n", cur_word);
     }
@@ -184,7 +184,11 @@ int get_word(word_t cur_word, int cur_word_limit)
     {
         // printf("while loop: cur_char value:%d", cur_char);
         if (cur_char == '\n' && (cur_char = getchar()) == '\n')
+        {
+            printf("para end");
+
             return PARA_END;
+        }
     }
     if (cur_char == EOF)
     {

@@ -117,7 +117,6 @@ int main(int argc, char *argv[])
 
     for (int i = 1; i < argc; i++)
     {
-        printf("Keyword: %s\n", argv[i]);
         keywords[i] = argv[i];
         num_keywords = i;
     }
@@ -146,6 +145,8 @@ int is_keyword(char word[])
 {
     for (int i = 0; i < num_keywords; i++)
     {
+
+        printf("Keyword: %s\n", keywords[i]);
         if (strcmp(word, keywords[i]) == 0)
         {
             return TRUE;

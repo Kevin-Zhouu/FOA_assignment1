@@ -126,7 +126,6 @@ int main(int argc, char *argv[])
             printf("%s\n", cur_paragraph);
             if (cur_code == EOF)
             {
-                printf("EOF\n");
                 break;
             }
             // stage 2: compute
@@ -139,8 +138,6 @@ int main(int argc, char *argv[])
 
 int get_paragraph(paragraph_t cur_paragraph, int *word_count, int cur_para_limit)
 {
-
-    printf("get para:\n");
     word_t cur_word;
     int cur_code = 0;
     // int cur_word_index = 0;

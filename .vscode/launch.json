@@ -1,16 +1,24 @@
 {
-  "version": "0.2.0",
-  "configurations": [
-    {
-      "name": "C/C++ Runner: Debug Session",
-      "type": "lldb",
-      "request": "launch",
-      "args": ["<", "data1.txt"],
-      "stopAtEntry": true,
-      "externalConsole": true,
-      "cwd": "/Users/bigsoup/Documents/Foundations_of_Algorithms/assignment1",
-      "program": "/Users/bigsoup/Documents/Foundations_of_Algorithms/assignment1/build/Debug/outDebug",
-      "MIMode": "gdb"
-    }
-  ]
+    "configurations": [
+        
+        {
+            "name": "C/C++: clang build and debug active file",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${fileDirname}/${fileBasenameNoExtension}",
+            "args": [
+                "<",
+                "${workspaceFolder}/test1.txt",
+                ">",
+                "${workspaceFolder}/testn.txt"
+            ],
+            "stopAtEntry": false,
+            "cwd": "${fileDirname}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "lldb",
+            "preLaunchTask": "C/C++: clang build active file"
+        }
+    ],
+    "version": "2.0.0"
 }

@@ -97,24 +97,19 @@ int get_word(word_t w, int limit);
 */
 
 typedef char paragraph_t[MAX_PARA_LEN + 1];
-int get_paragraph(paragraph_t, int *, int);
+int get_paragraph(paragraph_t, int *, int, char *, int);
 /****************************************************************/
 /* main program controls all the action
  */
 int main(int argc, char *argv[])
 {
 
-    for (int i = 1; i < argc; i++)
-    {
-        printf("Keyword: %s\n", argv[i]);
-    }
-
     word_t cur_paragraph;
     int para_num = 1;
 
     int cur_code = 0;
     int cur_para_word_count = 0;
-    while ((cur_code = get_paragraph(cur_paragraph, &cur_para_word_count, MAX_PARA_LEN)))
+    while ((cur_code = get_paragraph(cur_paragraph, &cur_para_word_count, MAX_PARA_LEN, argv, argc)))
     {
         if (cur_code == PARA_END || cur_code == EOF)
         {
@@ -136,12 +131,12 @@ int main(int argc, char *argv[])
     return 0;
 }
 
-int get_paragraph(paragraph_t cur_paragraph, int *word_count, int cur_para_limit)
+int get_paragraph(paragraph_t cur_paragraph, int *word_count, int cur_para_limit, char argv[], int argc)
 {
     word_t cur_word;
     int cur_code = 0;
     // int cur_word_index = 0;
-    while ((cur_code = get_word(cur_word, MAX_WORD_LEN)))
+    while ((cur_code = get_word(cur_word, MAX_WORD_LEN)) != EOF)
     {
 
         if (cur_code == PARA_END)
@@ -155,6 +150,11 @@ int get_paragraph(paragraph_t cur_paragraph, int *word_count, int cur_para_limit
         {
             printf("Word found: %s\n", cur_word);
             // cur_paragraph = (strcpy(cur_paragraph, cur_word) + 1);
+
+            for (int i = 1; i < argc; i++)
+            {
+                printf("Keyword: %s\n", argv[i]);
+            }
             strcpy(cur_paragraph, cur_word);
             cur_paragraph += (strlen(cur_word) + 1);
 
@@ -162,15 +162,11 @@ int get_paragraph(paragraph_t cur_paragraph, int *word_count, int cur_para_limit
 
             *(cur_paragraph - 1) = ' ';
         }
-        else
-        {
-
-            *(cur_paragraph - 1) = '\0';
-
-            return EOF;
-        }
         // printf("word: %s\n", cur_word);
     }
+    *(cur_paragraph - 1) = '\0';
+
+    return EOF;
 }
 /****************************************************************/
 

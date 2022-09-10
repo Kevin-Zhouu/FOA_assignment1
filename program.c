@@ -189,7 +189,7 @@ int get_word(word_t cur_word, int cur_word_limit)
     while ((cur_char = getchar()) != EOF && !isalnum(cur_char))
     {
         // printf("while loop: cur_char value:%d", cur_char);
-        if (cur_char == '\n' && (cur_char = getchar()) == '\n')
+        if (cur_char == '\n' && (getchar() == '\n'))
         {
 
             return PARA_END;

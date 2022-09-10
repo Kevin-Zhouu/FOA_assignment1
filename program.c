@@ -109,7 +109,7 @@ int main(int argc, char *argv[])
 
     int cur_code = 0;
     int cur_para_word_count = 0;
-    while ((cur_code = get_paragraph(cur_paragraph, &cur_para_word_count, MAX_PARA_LEN, argv, argc)))
+    while ((cur_code = get_paragraph(cur_paragraph, &cur_para_word_count, MAX_PARA_LEN, &argv, argc)))
     {
         if (cur_code == PARA_END || cur_code == EOF)
         {

@@ -162,7 +162,7 @@ int get_paragraph(paragraph_t cur_paragraph, int *word_count, int cur_para_limit
 
             *word_count += 1;
 
-            *(cur_paragraph) = ' ';
+            //*(cur_paragraph) = ' ';
         }
         // printf("word: %s\n", cur_word);
     }

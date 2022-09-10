@@ -144,24 +144,24 @@ int get_paragraph(paragraph_t cur_paragraph, int *word_count, int cur_para_limit
         if (cur_code == PARA_END)
         {
 
-            *(cur_paragraph + cur_word_index - 1) = '\0';
+            *cur_paragraph = '\0';
             return PARA_END;
         }
         else
         {
-            // printf("Word found: %s\n", cur_word);
-            strcpy(cur_paragraph + cur_word_index, cur_word);
+            printf("index:%d Word found: %s\n", cur_word_index, cur_word);
+            strcpy(cur_paragraph, cur_word);
             // cur_paragraph[cur_word_index + 1] = ' ';
 
             // printf("paragraph index: %d\n", cur_word_index);
 
             // printf("paragraph: %s\n", cur_paragraph);
 
-            cur_word_index += (strlen(cur_word) + 1);
+            cur_paragraph += (strlen(cur_word) + 1);
 
             *word_count += 1;
 
-            *(cur_paragraph + cur_word_index - 1) = ' ';
+            *cur_paragraph = ' ';
         }
         // printf("word: %s\n", cur_word);
     }

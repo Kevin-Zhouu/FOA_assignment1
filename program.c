@@ -105,7 +105,7 @@ int is_keyword(char[]);
 /* main program controls all the action
  */
 int num_keywords;
-char *keywords[];
+char *keywords[10];
 int main(int argc, char *argv[])
 {
 

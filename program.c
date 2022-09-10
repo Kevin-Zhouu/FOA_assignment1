@@ -105,7 +105,7 @@ int is_keyword(char[]);
 /* main program controls all the action
  */
 int num_keywords;
-char *keywords;
+char *keywords[];
 int main(int argc, char *argv[])
 {
 
@@ -114,12 +114,10 @@ int main(int argc, char *argv[])
 
     int cur_code = 0;
     int cur_para_word_count = 0;
-
-    keywords = argv + 1;
     num_keywords = argc - 2;
     for (int i = 1; i < argc; i++)
     {
-        // keywords[i] = argv[i];
+        keywords[i] = argv[i];
         // num_keywords = i;
         printf("keyword:%s\n", argv[i]);
     }

@@ -185,7 +185,6 @@ int get_word(word_t cur_word, int cur_word_limit)
         // printf("while loop: cur_char value:%d", cur_char);
         if (cur_char == '\n' && (cur_char = getchar()) == '\n')
         {
-            printf("para end");
 
             return PARA_END;
         }

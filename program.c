@@ -148,7 +148,8 @@ int get_paragraph(paragraph_t cur_paragraph, int *word_count, int cur_para_limit
         {
 
             *(cur_paragraph - 1) = '\0';
-            printf("para end") return PARA_END;
+            printf("para end");
+            return PARA_END;
         }
         else
         {

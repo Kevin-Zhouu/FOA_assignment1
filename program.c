@@ -144,7 +144,17 @@ int main(int argc, char *argv[])
 }
 int is_keyword(char word[])
 {
-    for ()
+    for (int i = 0; i < num_keywords; i++)
+    {
+        if (strcmp(word, keywords[i]) == 0)
+        {
+            return TRUE;
+        }
+        else
+        {
+            return FALSE;
+        }
+    }
 }
 int get_paragraph(paragraph_t cur_paragraph, int *word_count, int cur_para_limit)
 {
@@ -165,6 +175,10 @@ int get_paragraph(paragraph_t cur_paragraph, int *word_count, int cur_para_limit
         {
             printf("Word found: %s\n", cur_word);
             // cur_paragraph = (strcpy(cur_paragraph, cur_word) + 1);
+            if (is_keyword(cur_word))
+            {
+                printf("it is a keyword!");
+            }
 
             strcpy(cur_paragraph, cur_word);
             cur_paragraph += (strlen(cur_word) + 1);

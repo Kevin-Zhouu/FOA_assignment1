@@ -165,10 +165,12 @@ int get_paragraph(paragraph_t cur_paragraph, int *word_count, int cur_para_limit
         else
         {
 
-            return EOF;
+            break;
         }
         // printf("word: %s\n", cur_word);
     }
+
+    return EOF;
 }
 /****************************************************************/
 

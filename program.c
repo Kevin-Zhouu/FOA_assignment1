@@ -140,20 +140,20 @@ int main(int argc, char *argv[])
 }
 int is_keyword(char word[])
 {
-    // for (int i = 0; i < num_keywords; i++)
-    // {
+    for (int i = 0; i <= num_keywords; i++)
+    {
 
-    //     printf("Keyword: %s\n", keywords[i]);
-    //     if (strcmp(word, keywords[i]) == 0)
-    //     {
-    //         return TRUE;
-    //     }
-    //     else
-    //     {
-    //         return FALSE;
-    //     }
-    // }
-    return TRUE;
+        printf("Keyword: %s\n", keywords[i]);
+        if (strcmp(word, keywords[i]) == 0)
+        {
+            return TRUE;
+        }
+        else
+        {
+            return FALSE;
+        }
+    }
+    // return TRUE;
 }
 int get_paragraph(paragraph_t cur_paragraph, int *word_count, int cur_para_limit)
 {

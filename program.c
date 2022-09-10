@@ -117,6 +117,12 @@ int main(int argc, char *argv[])
 
     keywords = argv + 1;
     num_keywords = argc - 2;
+    for (int i = 1; i < argc; i++)
+    {
+        // keywords[i] = argv[i];
+        // num_keywords = i;
+        printf("keyword:", argv[i])
+    }
     while ((cur_code = get_paragraph(cur_paragraph, &cur_para_word_count, MAX_PARA_LEN)))
     {
         if (cur_code == PARA_END || cur_code == EOF)

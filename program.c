@@ -147,7 +147,7 @@ int get_paragraph(paragraph_t cur_paragraph, int *word_count, int cur_para_limit
         if (cur_code == PARA_END)
         {
 
-            *cur_paragraph = '\0';
+            *(cur_paragraph - 1) = '\0';
             return PARA_END;
         }
         else

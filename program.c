@@ -156,8 +156,8 @@ int get_paragraph(paragraph_t cur_paragraph, int *word_count, int cur_para_limit
         else
         {
             printf("Word found: %s\n", cur_word);
-            strcpy(cur_paragraph, cur_word);
-            // cur_paragraph[cur_word_index + 1] = ' ';
+            // strcpy(cur_paragraph, cur_word);
+            //  cur_paragraph[cur_word_index + 1] = ' ';
 
             // printf("paragraph index: %d\n", cur_word_index);
 

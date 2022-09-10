@@ -133,7 +133,7 @@ int main(int argc, char *argv[])
         }
     }
 
-    // return 0;
+    return 0;
 }
 
 int get_paragraph(paragraph_t cur_paragraph, int *word_count, int cur_para_limit)

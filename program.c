@@ -121,7 +121,7 @@ int main(int argc, char *argv[])
     {
         // keywords[i] = argv[i];
         // num_keywords = i;
-        printf("keyword:", argv[i])
+        printf("keyword:", argv[i]);
     }
     while ((cur_code = get_paragraph(cur_paragraph, &cur_para_word_count, MAX_PARA_LEN)))
     {

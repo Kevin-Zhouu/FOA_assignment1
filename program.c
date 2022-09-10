@@ -114,7 +114,7 @@ int main(int argc, char *argv[])
 
     int cur_code = 0;
     int cur_para_word_count = 0;
-    num_keywords = argc - 1;
+    num_keywords = argc - 2;
     // keywords = argv + 1;
     for (int i = 1; i < argc; i++)
     {

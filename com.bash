@@ -8,3 +8,5 @@ echo "Testing data2.txt"
 ./program a b c < data2.txt
 echo "Testing data3.txt"
 ./program a b c < data3.txt
+git add .
+git commit -m "run"

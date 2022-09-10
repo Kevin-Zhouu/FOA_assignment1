@@ -122,10 +122,14 @@ int main(int argc, char *argv[])
             printf("======= Stage 1 [para %d; %d words]\n", para_num, cur_para_word_count);
             para_num += 1;
             cur_para_word_count = 0;
-            if (cur_code == EOF)
-                return 0;
-            // stage 2: compute
+
             printf("%s\n", cur_paragraph);
+            if (cur_code == EOF)
+            {
+                printf("EOF\n");
+                return 0;
+            }
+            // stage 2: compute
         }
     }
 
@@ -135,6 +139,7 @@ int main(int argc, char *argv[])
 int get_paragraph(paragraph_t cur_paragraph, int *word_count, int cur_para_limit)
 {
 
+    printf("get para:\n");
     word_t cur_word;
     int cur_code = 0;
     // int cur_word_index = 0;
@@ -178,7 +183,7 @@ int get_paragraph(paragraph_t cur_paragraph, int *word_count, int cur_para_limit
 int get_word(word_t cur_word, int cur_word_limit)
 {
 
-    printf("reading:");
+    printf("reading:\n");
     int cur_char;
     // int new_line_count = 0;
     /* first, skip over any non alphanumerics */

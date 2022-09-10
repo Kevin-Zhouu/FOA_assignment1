@@ -127,13 +127,13 @@ int main(int argc, char *argv[])
             if (cur_code == EOF)
             {
                 printf("EOF\n");
-                return 0;
+                break;
             }
             // stage 2: compute
         }
     }
 
-    return 0;
+    // return 0;
 }
 
 int get_paragraph(paragraph_t cur_paragraph, int *word_count, int cur_para_limit)

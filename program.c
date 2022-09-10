@@ -152,11 +152,9 @@ int is_keyword(char word[])
         {
             return TRUE;
         }
-        else
-        {
-            return FALSE;
-        }
     }
+
+    return FALSE;
     // return TRUE;
 }
 int get_paragraph(paragraph_t cur_paragraph, int *word_count, int cur_para_limit)

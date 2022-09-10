@@ -117,13 +117,6 @@ int main(int argc, char *argv[])
 
     keywords = argv + 1;
     num_keywords = argc - 2;
-
-    for (int i = 1; i < argc; i++)
-    {
-        keywords[i] = argv[i];
-
-        num_keywords = i;
-    }
     while ((cur_code = get_paragraph(cur_paragraph, &cur_para_word_count, MAX_PARA_LEN)))
     {
         if (cur_code == PARA_END || cur_code == EOF)
@@ -147,19 +140,20 @@ int main(int argc, char *argv[])
 }
 int is_keyword(char word[])
 {
-    for (int i = 0; i < num_keywords; i++)
-    {
+    // for (int i = 0; i < num_keywords; i++)
+    // {
 
-        printf("Keyword: %s\n", keywords[i]);
-        if (strcmp(word, keywords[i]) == 0)
-        {
-            return TRUE;
-        }
-        else
-        {
-            return FALSE;
-        }
-    }
+    //     printf("Keyword: %s\n", keywords[i]);
+    //     if (strcmp(word, keywords[i]) == 0)
+    //     {
+    //         return TRUE;
+    //     }
+    //     else
+    //     {
+    //         return FALSE;
+    //     }
+    // }
+    return TRUE;
 }
 int get_paragraph(paragraph_t cur_paragraph, int *word_count, int cur_para_limit)
 {

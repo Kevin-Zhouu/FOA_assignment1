@@ -133,6 +133,7 @@ int main(int argc, char *argv[])
         }
     }
 
+    printf("EOF1\n");
     return 0;
 }
 

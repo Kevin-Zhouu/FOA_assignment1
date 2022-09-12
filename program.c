@@ -135,6 +135,7 @@ int main(int argc, char *argv[])
             printf("======= Stage 2 [para %d; %d words; %d matches ]\n", para_num, cur_para_word_count, cur_para_match_count);
             para_num += 1;
             cur_para_word_count = 0;
+            cur_para_match_count = 0;
 
             printf("%s\n", cur_paragraph);
             if (cur_code == EOF)
@@ -177,8 +178,6 @@ int get_paragraph(paragraph_t cur_paragraph, int *word_count, int *cur_para_matc
         {
 
             *(cur_paragraph - 1) = '\0';
-            printf("para end");
-            printf("\n number of matches:%d", cur_para_match_count);
             return PARA_END;
         }
         else if (cur_code == WORD_FND)
@@ -259,7 +258,6 @@ int get_word(word_t cur_word, int cur_word_limit)
 
 int all_to_lower(word_t word)
 {
-    printf("converting%s", word);
     int word_len = strlen(word);
     int num_changed = 0;
     for (int i = 0; i < word_len; i++)
@@ -270,7 +268,6 @@ int all_to_lower(word_t word)
             num_changed += 1;
         }
     }
-    printf("converted%s", word);
     return num_changed;
 }
 // algorithms are fun!

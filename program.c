@@ -89,6 +89,8 @@
 
 typedef char word_t[MAX_WORD_LEN + 1];
 int get_word(word_t w, int limit);
+
+int all_to_lower(word_t w);
 /* If you wish to add further #defines, put them below this comment,
    then prototypes for the functions that you add
 
@@ -148,7 +150,7 @@ int is_keyword(char word[])
     {
 
         printf("Comparing: keyword: %s\n with \n%s\n", *(keywords + i), word);
-        if (strcicmp(word, *(keywords + i)) == 0)
+        if (strcicmp(all_to_lower(word), *(keywords + i)) == 0)
         {
 
             return TRUE;
@@ -158,16 +160,7 @@ int is_keyword(char word[])
     return FALSE;
     // return TRUE;
 }
-// from StackOverFlow
-int strcicmp(char const *a, char const *b)
-{
-    for (;; a++, b++)
-    {
-        int d = tolower((unsigned char)*a) - tolower((unsigned char)*b);
-        if (d != 0 || !*a)
-            return d;
-    }
-}
+
 int get_paragraph(paragraph_t cur_paragraph, int *word_count, int cur_para_limit)
 {
     word_t cur_word;
@@ -258,4 +251,18 @@ int get_word(word_t cur_word, int cur_word_limit)
     return WORD_FND;
 }
 
+int all_to_lower(word_t word)
+{
+    int word_len = strlen(word);
+    int num_changed = 0;
+    for (int i = 0; i < word_len; i++)
+    {
+        if (word[i] >= 65 && word[i] <= 90)
+        {
+            word[i] += 32;
+            num_changed += 1;
+        }
+    }
+    return num_changed;
+}
 // algorithms are fun!

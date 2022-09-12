@@ -101,7 +101,7 @@ int all_to_lower(word_t w);
 #define FALSE 0;
 
 typedef char paragraph_t[MAX_PARA_LEN + 1];
-int get_paragraph(paragraph_t, int *, int);
+int get_paragraph(paragraph_t, int *, int *, int);
 int is_keyword(char[]);
 /****************************************************************/
 /* main program controls all the action
@@ -116,6 +116,7 @@ int main(int argc, char *argv[])
 
     int cur_code = 0;
     int cur_para_word_count = 0;
+    int cur_para_match_count = 0;
     num_keywords = argc - 2;
     // keywords = argv + 1;
     for (int i = 1; i < argc; i++)
@@ -123,12 +124,15 @@ int main(int argc, char *argv[])
         keywords[i - 1] = argv[i];
         // num_keywords = i;
     }
-    while ((cur_code = get_paragraph(cur_paragraph, &cur_para_word_count, MAX_PARA_LEN)))
+    while ((cur_code = get_paragraph(cur_paragraph, &cur_para_word_count, &cur_para_match_count, MAX_PARA_LEN)))
     {
         if (cur_code == PARA_END || cur_code == EOF)
         {
             // stage 1:
             printf("======= Stage 1 [para %d; %d words]\n", para_num, cur_para_word_count);
+
+            // stage 1:
+            printf("======= Stage 2 [para %d; %d words; %d matches ]\n", para_num, cur_para_word_count, cur_para_match_count);
             para_num += 1;
             cur_para_word_count = 0;
 
@@ -161,11 +165,10 @@ int is_keyword(char word[])
     // return TRUE;
 }
 
-int get_paragraph(paragraph_t cur_paragraph, int *word_count, int cur_para_limit)
+int get_paragraph(paragraph_t cur_paragraph, int *word_count, int *cur_para_match_count, int cur_para_limit)
 {
     word_t cur_word;
     int cur_code = 0;
-    int num_matches = 0;
     // int cur_word_index = 0;
     while ((cur_code = get_word(cur_word, MAX_WORD_LEN)) != EOF)
     {
@@ -175,7 +178,7 @@ int get_paragraph(paragraph_t cur_paragraph, int *word_count, int cur_para_limit
 
             *(cur_paragraph - 1) = '\0';
             printf("para end");
-            printf("\n number of matches:%d", num_matches);
+            printf("\n number of matches:%d", cur_para_match_count);
             return PARA_END;
         }
         else if (cur_code == WORD_FND)
@@ -185,7 +188,7 @@ int get_paragraph(paragraph_t cur_paragraph, int *word_count, int cur_para_limit
             if (is_keyword(cur_word))
             {
                 printf("it is a keyword!");
-                num_matches += 1;
+                cur_para_match_count += 1;
             }
 
             strcpy(cur_paragraph, cur_word);

@@ -188,7 +188,7 @@ int get_paragraph(paragraph_t cur_paragraph, int *word_count, int *cur_para_matc
             if (is_keyword(cur_word))
             {
                 printf("it is a keyword!");
-                cur_para_match_count += 1;
+                *cur_para_match_count += 1;
             }
 
             strcpy(cur_paragraph, cur_word);

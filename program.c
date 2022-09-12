@@ -253,6 +253,7 @@ int get_word(word_t cur_word, int cur_word_limit)
 
 int all_to_lower(word_t word)
 {
+    printf("converting%s", word);
     int word_len = strlen(word);
     int num_changed = 0;
     for (int i = 0; i < word_len; i++)
@@ -263,6 +264,7 @@ int all_to_lower(word_t word)
             num_changed += 1;
         }
     }
+    printf("converted%s", word);
     return num_changed;
 }
 // algorithms are fun!

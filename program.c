@@ -150,7 +150,7 @@ int is_keyword(char word[])
     {
 
         printf("Comparing: keyword: %s\n with \n%s\n", *(keywords + i), all_to_lower(word));
-        if (strcicmp(all_to_lower(word), *(keywords + i)) == 0)
+        if (strcmp(all_to_lower(word), *(keywords + i)) == 0)
         {
 
             return TRUE;

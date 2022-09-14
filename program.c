@@ -192,12 +192,12 @@ int get_paragraph(paragraph_t cur_paragraph, int *word_count, int *cur_para_matc
                 *cur_para_match_count += 1;
             }
 
-            strcpy(cur_paragraph, cur_word);
-            cur_paragraph += (strlen(cur_word) + 1);
+            // strcpy(cur_paragraph, cur_word);
+            // cur_paragraph += (strlen(cur_word) + 1);
 
-            *word_count += 1;
+            // *word_count += 1;
 
-            *(cur_paragraph - 1) = ' ';
+            // *(cur_paragraph - 1) = ' ';
         }
         // printf("word: %s\n", cur_word);
     }

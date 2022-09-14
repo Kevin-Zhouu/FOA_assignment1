@@ -143,6 +143,8 @@ int main(int argc, char *argv[])
                 break;
             }
             // stage 2: compute
+
+            free(cur_paragraph);
         }
     }
 

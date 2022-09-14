@@ -194,9 +194,10 @@ int get_paragraph(paragraph_t cur_paragraph, int *word_count, int *cur_para_matc
             }
 
             strcpy(cur_paragraph, cur_word);
+            strncpy(cur_paragraph + strlen(cur_word), " ", 1);
 
             cur_paragraph += (strlen(cur_word));
-            *(cur_paragraph) = ' ';
+            //*(cur_paragraph) = ' ';
 
             *word_count += 1;
         }

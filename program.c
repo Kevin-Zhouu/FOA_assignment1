@@ -153,9 +153,9 @@ int is_keyword(char word[])
 {
     for (int i = 0; i <= num_keywords; i++)
     {
-        all_to_lower(word);
-        // printf("Comparing: keyword: %s\n with \n%s\n", *(keywords + i), word);
-        if (strcmp(word, *(keywords + i)) == 0)
+        // all_to_lower(word);
+        //  printf("Comparing: keyword: %s\n with \n%s\n", *(keywords + i), word);
+        if (strncasecmp(word, *(keywords + i), strlen(word)) == 0)
         {
 
             return TRUE;

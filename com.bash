@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+rm ./program
 gcc -Wall -o program program.c
 
 echo "Testing data1.txt"

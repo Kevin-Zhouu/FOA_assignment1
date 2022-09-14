@@ -153,9 +153,7 @@ int is_keyword(char word[])
 {
     for (int i = 0; i <= num_keywords; i++)
     {
-
-        word_t temp_word = strcpy(temp_word, word);
-        all_to_lower(temp_word);
+        all_to_lower(word);
         // printf("Comparing: keyword: %s\n with \n%s\n", *(keywords + i), word);
         if (strcmp(word, *(keywords + i)) == 0)
         {
@@ -184,8 +182,8 @@ int get_paragraph(paragraph_t cur_paragraph, int *word_count, int *cur_para_matc
         }
         else if (cur_code == WORD_FND)
         {
-            // printf("Word found: %s\n", cur_word);
-            //  cur_paragraph = (strcpy(cur_paragraph, cur_word) + 1);
+            printf("Word found: %s\n", cur_word);
+            // cur_paragraph = (strcpy(cur_paragraph, cur_word) + 1);
             if (is_keyword(cur_word))
             {
                 printf("it is a keyword!");

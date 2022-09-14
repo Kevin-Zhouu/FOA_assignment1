@@ -143,8 +143,6 @@ int main(int argc, char *argv[])
                 break;
             }
             // stage 2: compute
-
-            free(cur_paragraph);
         }
     }
 
@@ -199,7 +197,6 @@ int get_paragraph(paragraph_t cur_paragraph, int *word_count, int *cur_para_matc
 
             *(cur_paragraph - 1) = ' ';
         }
-        free(cur_word);
         // printf("word: %s\n", cur_word);
     }
     *(cur_paragraph - 1) = '\0';

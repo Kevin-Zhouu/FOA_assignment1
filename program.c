@@ -135,7 +135,6 @@ int main(int argc, char *argv[])
             printf("======= Stage 2 [para %d; %d words; %d matches ]\n", para_num, cur_para_word_count, cur_para_match_count);
             para_num += 1;
             cur_para_word_count = 0;
-            cur_para_match_count = 0;
 
             printf("%s\n", cur_paragraph);
             if (cur_code == EOF)
@@ -153,13 +152,11 @@ int is_keyword(char word[])
 {
     for (int i = 0; i <= num_keywords; i++)
     {
-
-        // word_t temp_word;
-        // strcpy(temp_word, word);
-        // all_to_lower(temp_word);
-        // printf("Comparing: keyword: %s\n with \n%s\n", *(keywords + i), word);
-        if (strncasecmp(word, *(keywords + i), strlen(word)) == 0)
+        all_to_lower(word);
+        printf("Comparing: keyword: %s\n with \n%s\n", *(keywords + i), word);
+        if (strcmp(word, *(keywords + i)) == 0)
         {
+
             return TRUE;
         }
     }
@@ -184,21 +181,20 @@ int get_paragraph(paragraph_t cur_paragraph, int *word_count, int *cur_para_matc
         }
         else if (cur_code == WORD_FND)
         {
-            // printf("Word found: %s\n", cur_word);
-            //  cur_paragraph = (strcpy(cur_paragraph, cur_word) + 1);
+            printf("Word found: %s\n", cur_word);
+            // cur_paragraph = (strcpy(cur_paragraph, cur_word) + 1);
             if (is_keyword(cur_word))
             {
                 printf("it is a keyword!");
                 *cur_para_match_count += 1;
             }
-            // strncpy(cur_paragraph, cur_word, strlen(cur_word));
-            strcpy(cur_paragraph, cur_word);
-            //  strncpy(cur_paragraph + strlen(cur_word), " ", 1);
 
+            strcpy(cur_paragraph, cur_word);
             cur_paragraph += (strlen(cur_word) + 1);
-            *(cur_paragraph) = ' ';
 
             *word_count += 1;
+
+            *(cur_paragraph - 1) = ' ';
         }
         // printf("word: %s\n", cur_word);
     }

@@ -156,7 +156,7 @@ int is_keyword(word_t word)
     for (int i = 0; i <= num_keywords; i++)
     {
         //  printf("Comparing: keyword: %s\n with \n%s\n", *(keywords + i), word);
-        if (word_compare(word, *(keywords + i)) == TRUE)
+        if (word_compare(word, *(keywords + i)) == 1)
         {
 
             return TRUE;

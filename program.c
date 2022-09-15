@@ -124,6 +124,7 @@ int main(int argc, char *argv[])
     for (int i = 1; i < argc; i++)
     {
         keywords[i - 1] = argv[i];
+        printf("keyword:%s", keywords[i - 1]);
         // num_keywords = i;
     }
     while ((cur_code = get_paragraph(cur_paragraph, &cur_para_word_count, &cur_para_match_count, MAX_PARA_LEN)))
@@ -258,7 +259,7 @@ int get_word(word_t cur_word, int cur_word_limit)
 }
 int word_compare(word_t keyword, word_t word_a)
 {
-    int is_keyword = FALSE;
+    int is_same = FALSE;
     int strlen_keyword = strlen(keyword);
     int strlen_word = strlen(word_a);
     // Case 1: two words have same length
@@ -267,7 +268,8 @@ int word_compare(word_t keyword, word_t word_a)
         int result = strncasecmp(keyword, word_a, strlen_keyword);
         if (result == 0)
         {
-            is_keyword = TRUE;
+            is_same = TRUE;
+            printf("Found: %s\n", word_a);
         }
     }
     // Case 2: if the last char is non-alphanumerical
@@ -276,23 +278,23 @@ int word_compare(word_t keyword, word_t word_a)
         int result = (strncasecmp(keyword, word_a, strlen(word_a) - 1) == 0);
         if (result == 0)
         {
-            is_keyword = TRUE;
+            is_same = TRUE;
         }
     }
-    return is_keyword;
+    return is_same;
 }
-int all_to_lower(word_t word)
-{
-    int word_len = strlen(word);
-    int num_changed = 0;
-    for (int i = 0; i < word_len; i++)
-    {
-        if (word[i] >= 65 && word[i] <= 90)
-        {
-            word[i] += 32;
-            num_changed += 1;
-        }
-    }
-    return num_changed;
-}
+// int all_to_lower(word_t word)
+// {
+//     int word_len = strlen(word);
+//     int num_changed = 0;
+//     for (int i = 0; i < word_len; i++)
+//     {
+//         if (word[i] >= 65 && word[i] <= 90)
+//         {
+//             word[i] += 32;
+//             num_changed += 1;
+//         }
+//     }
+//     return num_changed;
+// }
 // algorithms are fun!

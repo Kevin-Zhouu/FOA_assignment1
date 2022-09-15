@@ -260,13 +260,25 @@ int get_word(word_t cur_word, int cur_word_limit)
 int word_compare(word_t keyword, word_t word_a)
 {
     int is_keyword = FALSE;
+    int strlen_keyword = strlen(keyword);
+    int strlen_word = strlen(word_a);
+    // Case 1: two words have same length
+    if (strlen_keyword == strlen_word)
+    {
+        int result = strncasecmp(keyword, word_a, strlen_keyword);
+        if (result == 0)
+        {
+            is_keyword = TRUE;
+        }
+    }
+    // Case 2: if the last char is non-alphanumerical
     if (!isalnum(*(word_a + strlen(word_a) - 1)))
     {
-        is_keyword = (strncasecmp(keyword, word_a, strlen(word_a) - 1) == 0);
-    }
-    else
-    {
-        is_keyword = (strncasecmp(keyword, word_a, strlen(word_a)) == 0);
+        int result = (strncasecmp(keyword, word_a, strlen(word_a) - 1) == 0);
+        if (result == 0)
+        {
+            is_keyword = TRUE;
+        }
     }
     return is_keyword;
 }

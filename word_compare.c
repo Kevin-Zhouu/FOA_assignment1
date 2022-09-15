@@ -112,23 +112,41 @@ char *keywords[10];
 int word_compare(word_t keyword, word_t word_a);
 int main(int argc, char *argv[])
 {
-    char arr[6] = "hello";
-    char arr2[6] = "hello";
-    int result = word_compare(keyword, worda);
-    printf("is keyword: %d", result);
+
+    char keyword[] = "alice";
+
+    char word[] = "Aliceb";
+    int result = word_compare(keyword, word);
+    printf("is keyword: %d\n", result);
 
     return 0;
 }
+/* Determines whether a given word matches the given keyword
+    in a case-insensitive manner.
+    Returns 1 if the word matches the keyword, 0 otherwise
+    */
 int word_compare(word_t keyword, word_t word_a)
 {
     int is_keyword = FALSE;
+    int strlen_keyword = strlen(keyword);
+    int strlen_word = strlen(word_a);
+    // Case 1: two words have same length
+    if (strlen_keyword == strlen_word)
+    {
+        int result = strncasecmp(keyword, word_a, strlen_keyword);
+        if (result == 0)
+        {
+            is_keyword = TRUE;
+        }
+    }
+    // Case 2: if the last char is non-alphanumerical
     if (!isalnum(*(word_a + strlen(word_a) - 1)))
     {
-        is_keyword = (strncasecmp(keyword, word_a, strlen(word_a) - 1) == 0);
-    }
-    else
-    {
-        is_keyword = (strncasecmp(keyword, word_a, strlen(word_a)) == 0);
+        int result = (strncasecmp(keyword, word_a, strlen(word_a) - 1) == 0);
+        if (result == 0)
+        {
+            is_keyword = TRUE;
+        }
     }
     return is_keyword;
 }

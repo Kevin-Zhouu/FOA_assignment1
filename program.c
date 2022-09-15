@@ -103,7 +103,7 @@ int all_to_lower(word_t w);
 typedef char paragraph_t[MAX_PARA_LEN + 1];
 int get_paragraph(paragraph_t cur_paragraph, int *word_count, int *cur_para_match_count, int cur_para_limit);
 int is_keyword(word_t word);
-int word_compare(word_t, word_t);
+int word_compare(word_t keyword, word_t word_a);
 /****************************************************************/
 /* main program controls all the action
  */
@@ -157,7 +157,7 @@ int is_keyword(word_t word)
     {
         all_to_lower(word);
         //  printf("Comparing: keyword: %s\n with \n%s\n", *(keywords + i), word);
-        if (strcmp(word, *(keywords + i)) == 0)
+        if (word_compare(word, *(keywords + i)) == 0)
         {
 
             return TRUE;
@@ -257,7 +257,19 @@ int get_word(word_t cur_word, int cur_word_limit)
     *cur_word = '\0';
     return WORD_FND;
 }
-
+int word_compare(word_t keyword, word_t word_a)
+{
+    int is_keyword = FALSE;
+    if (!isalnum(*(word_a + strlen(word_a) - 1)))
+    {
+        is_keyword = (strncasecmp(keyword, word_a, strlen(word_a) - 1) == 0);
+    }
+    else
+    {
+        is_keyword = (strncasecmp(keyword, word_a, strlen(word_a)) == 0);
+    }
+    return is_keyword;
+}
 int all_to_lower(word_t word)
 {
     int word_len = strlen(word);

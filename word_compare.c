@@ -112,9 +112,9 @@ char *keywords[10];
 int word_compare(word_t keyword, word_t word_a);
 int main(int argc, char *argv[])
 {
-    word_t keyword = "Alice";
-    word_t word = "alice";
-    int result = word_compare(keyword, word);
+    char arr[6] = "hello";
+    char arr2[6] = "hello";
+    int result = word_compare(keyword, worda);
     printf("is keyword: %d", result);
 
     return 0;

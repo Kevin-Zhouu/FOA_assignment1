@@ -5,12 +5,10 @@
             "name": "C/C++: clang build and debug active file",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${fileDirname}/${fileBasenameNoExtension}",
+            "program": "${workspaceFolder}/program",
             "args": [
-                "<",
-                "${workspaceFolder}/test1.txt",
-                ">",
-                "${workspaceFolder}/testn.txt"
+                "alice",
+                "feet",
             ],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",

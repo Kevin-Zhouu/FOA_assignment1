@@ -103,173 +103,34 @@ int all_to_lower(word_t w);
 typedef char paragraph_t[MAX_PARA_LEN + 1];
 int get_paragraph(paragraph_t cur_paragraph, int *word_count, int *cur_para_match_count, int cur_para_limit);
 int is_keyword(word_t word);
-int word_compare(word_t, word_t);
+int word_compare(word_t word_a, word_t word_b);
 /****************************************************************/
 /* main program controls all the action
  */
 int num_keywords;
 char *keywords[10];
+int word_compare(word_t keyword, word_t word_a);
 int main(int argc, char *argv[])
 {
-    freopen("data1.txt", "r", stdin);
+    word_t keyword = "Alice";
+    word_t word = "alice";
+    int result = word_compare(keyword, word);
+    printf("is keyword: %d", result);
 
-    paragraph_t cur_paragraph;
-    int para_num = 1;
-
-    int cur_code = 0;
-    int cur_para_word_count = 0;
-    int cur_para_match_count = 0;
-    num_keywords = argc - 2;
-    // keywords = argv + 1;
-    for (int i = 1; i < argc; i++)
-    {
-        keywords[i - 1] = argv[i];
-        // num_keywords = i;
-    }
-    while ((cur_code = get_paragraph(cur_paragraph, &cur_para_word_count, &cur_para_match_count, MAX_PARA_LEN)))
-    {
-        if (cur_code == PARA_END || cur_code == EOF)
-        {
-            // stage 1:
-            printf("======= Stage 1 [para %d; %d words]\n", para_num, cur_para_word_count);
-
-            // stage 1:
-            printf("======= Stage 2 [para %d; %d words; %d matches ]\n", para_num, cur_para_word_count, cur_para_match_count);
-            para_num += 1;
-            cur_para_word_count = 0;
-            cur_para_match_count = 0;
-
-            printf("%s\n", cur_paragraph);
-            if (cur_code == EOF)
-            {
-                break;
-            }
-            // stage 2: compute
-        }
-    }
-
-    printf("ta daa!");
     return 0;
 }
-int is_keyword(word_t word)
+int word_compare(word_t keyword, word_t word_a)
 {
-    for (int i = 0; i <= num_keywords; i++)
+    int is_keyword = FALSE;
+    if (!isalnum(*(word_a + strlen(word_a) - 1)))
     {
-        all_to_lower(word);
-        //  printf("Comparing: keyword: %s\n with \n%s\n", *(keywords + i), word);
-        if (strcmp(word, *(keywords + i)) == 0)
-        {
-
-            return TRUE;
-        }
+        is_keyword = (strncasecmp(keyword, word_a, strlen(word_a) - 1) == 0);
     }
-
-    return FALSE;
-    // return TRUE;
+    else
+    {
+        is_keyword = (strncasecmp(keyword, word_a, strlen(word_a)) == 0);
+    }
+    return is_keyword;
 }
 
-int get_paragraph(paragraph_t cur_paragraph, int *word_count, int *cur_para_match_count, int cur_para_limit)
-{
-    word_t cur_word;
-    int cur_code = 0;
-    // int cur_word_index = 0;
-    while ((cur_code = get_word(cur_word, MAX_WORD_LEN)) != EOF)
-    {
-
-        if (cur_code == PARA_END)
-        {
-
-            *(cur_paragraph - 1) = '\0';
-            return PARA_END;
-        }
-        else if (cur_code == WORD_FND)
-        {
-            // printf("Word found: %s\n", cur_word);
-            //  cur_paragraph = (strcpy(cur_paragraph, cur_word) + 1);
-            if (is_keyword(cur_word))
-            {
-                // printf("it is a keyword!");
-                *cur_para_match_count += 1;
-            }
-
-            strcpy(cur_paragraph, cur_word);
-            cur_paragraph += (strlen(cur_word) + 1);
-
-            *word_count += 1;
-
-            *(cur_paragraph - 1) = ' ';
-        }
-        // printf("word: %s\n", cur_word);
-    }
-    *(cur_paragraph - 1) = '\0';
-
-    return EOF;
-}
-/****************************************************************/
-
-/* extract a single word out of the standard input, but not
-   more than "limit" characters in total. One character of
-   sensible trailing punctuation is retained.
-   argument array W must be limit+1 characters or bigger
-*/
-int get_word(word_t cur_word, int cur_word_limit)
-{
-
-    // printf("reading:\n");
-    int cur_char;
-    // int new_line_count = 0;
-    /* first, skip over any non alphanumerics */
-    while ((cur_char = getchar()) != EOF && !isalnum(cur_char))
-    {
-        // printf("while loop: cur_char value:%d", cur_char);
-        if (cur_char == '\n' && (getchar() == '\n'))
-        {
-
-            return PARA_END;
-        }
-    }
-    if (cur_char == EOF)
-    {
-        return EOF;
-    }
-    /* ok, first character of next word has been found */
-    *cur_word = cur_char;
-    cur_word += 1;
-    cur_word_limit -= 1;
-    while (cur_word_limit > 0 && (cur_char = getchar()) != EOF && isalnum(cur_char))
-    {
-        /* another character to be stored */
-        *cur_word = cur_char;
-        cur_word += 1;
-        cur_word_limit -= 1;
-    }
-    /* take a look at that next character, is it a sensible trailing
-       punctuation? */
-    if (strchr(TERM_PUNCT, cur_char) && (cur_word_limit > 0))
-    {
-        /* yes, it is */
-        *cur_word = cur_char;
-        cur_word += 1;
-        cur_word_limit -= 1;
-    }
-
-    /* now close off the string */
-    *cur_word = '\0';
-    return WORD_FND;
-}
-
-int all_to_lower(word_t word)
-{
-    int word_len = strlen(word);
-    int num_changed = 0;
-    for (int i = 0; i < word_len; i++)
-    {
-        if (word[i] >= 65 && word[i] <= 90)
-        {
-            word[i] += 32;
-            num_changed += 1;
-        }
-    }
-    return num_changed;
-}
 // algorithms are fun!

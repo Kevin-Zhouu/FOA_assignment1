@@ -104,11 +104,13 @@ typedef char paragraph_t[MAX_PARA_LEN + 1];
 int get_paragraph(paragraph_t cur_paragraph, int *word_count, int *cur_para_match_count, int cur_para_limit);
 int is_keyword(word_t word);
 int word_compare(word_t keyword, word_t word_a);
+int is_punchation_end(word_t word);
+int add_stars(word_t cur_word, paragraph_t cur_paragraph);
 /****************************************************************/
 /* main program controls all the action
  */
 int num_keywords;
-char *keywords[10];
+char *keywords[MAX_WORD_LEN + 1];
 int main(int argc, char *argv[])
 {
     freopen("data1.txt", "r", stdin);
@@ -120,12 +122,11 @@ int main(int argc, char *argv[])
     int cur_para_word_count = 0;
     int cur_para_match_count = 0;
     num_keywords = argc - 2;
-    // keywords = argv + 1;
+    // add keywords to array
     for (int i = 1; i < argc; i++)
     {
         keywords[i - 1] = argv[i];
-        printf("keyword:%s", keywords[i - 1]);
-        // num_keywords = i;
+        // printf("keyword:%s", keywords[i - 1]);
     }
     while ((cur_code = get_paragraph(cur_paragraph, &cur_para_word_count, &cur_para_match_count, MAX_PARA_LEN)))
     {
@@ -157,7 +158,7 @@ int is_keyword(word_t word)
     for (int i = 0; i <= num_keywords; i++)
     {
         //  printf("Comparing: keyword: %s\n with \n%s\n", *(keywords + i), word);
-        if (word_compare(word, *(keywords + i)) == 1)
+        if (word_compare(*(keywords + i), word) == 1)
         {
 
             return TRUE;
@@ -190,12 +191,17 @@ int get_paragraph(paragraph_t cur_paragraph, int *word_count, int *cur_para_matc
             {
                 // printf("it is a keyword!");
                 *cur_para_match_count += 1;
+                add_stars(cur_word, cur_paragraph);
+                cur_paragraph += (strlen(cur_word) + 5);
+                *word_count += 1;
             }
-
-            strcpy(cur_paragraph, cur_word);
-            cur_paragraph += (strlen(cur_word) + 1);
-
-            *word_count += 1;
+            else
+            {
+                strcpy(cur_paragraph, cur_word);
+                cur_paragraph += (strlen(cur_word) + 1);
+                *word_count += 1;
+            }
+            // add space
 
             *(cur_paragraph - 1) = ' ';
         }
@@ -257,9 +263,13 @@ int get_word(word_t cur_word, int cur_word_limit)
     *cur_word = '\0';
     return WORD_FND;
 }
+/* Determines whether a given word matches the given keyword
+    in a case-insensitive manner.
+    Returns 1 if the word matches the keyword, 0 otherwise
+    */
 int word_compare(word_t keyword, word_t word_a)
 {
-    int is_same = FALSE;
+    int is_keyword = FALSE;
     int strlen_keyword = strlen(keyword);
     int strlen_word = strlen(word_a);
     // Case 1: two words have same length
@@ -268,20 +278,71 @@ int word_compare(word_t keyword, word_t word_a)
         int result = strncasecmp(keyword, word_a, strlen_keyword);
         if (result == 0)
         {
-            is_same = TRUE;
-            printf("Found: %s\n", word_a);
+            is_keyword = TRUE;
         }
     }
     // Case 2: if the last char is non-alphanumerical
-    if (!isalnum(*(word_a + strlen(word_a) - 1)))
+    // printf("last char:%c\n", *(word_a + strlen(word_a) - 1));
+    // printf("comparing: keyword: %s\n with %s\n ", keyword, word_a);
+    // printf("compare result:%d", strncasecmp(keyword, word_a, strlen_keyword) == 0);
+    if (strlen_word == strlen_keyword + 1)
     {
-        int result = (strncasecmp(keyword, word_a, strlen(word_a) - 1) == 0);
-        if (result == 0)
+        if (is_punchation_end(word_a))
         {
-            is_same = TRUE;
+            // printf("punchation!");
+            int result = strncasecmp(keyword, word_a, strlen_keyword);
+            // printf("result!,%d", result);
+            if (result == 0)
+            {
+                is_keyword = TRUE;
+            }
         }
     }
-    return is_same;
+    return is_keyword;
+}
+int is_punchation_end(word_t word)
+{
+    return !isalnum(*(word + strlen(word) - 1));
+}
+
+int add_stars(word_t cur_word, paragraph_t cur_paragraph)
+{
+    // printf("adding stars:\n");
+
+    // printf("cur_word stars: %s\n", cur_word);
+    *(cur_paragraph) = '*';
+    *(cur_paragraph + 1) = '*';
+    cur_paragraph += 2;
+    strcpy(cur_paragraph, cur_word);
+
+    if (is_punchation_end(cur_word))
+    {
+        char punchation = *(cur_word + strlen(cur_word) - 1);
+        cur_paragraph += (strlen(cur_word) - 1);
+
+        *(cur_paragraph) = '*';
+        cur_paragraph += 1;
+        *(cur_paragraph) = '*';
+
+        cur_paragraph += 1;
+        *(cur_paragraph) = punchation;
+
+        cur_paragraph += 2;
+
+        return 1;
+    }
+    else
+    {
+        cur_paragraph += (strlen(cur_word));
+        *(cur_paragraph) = '*';
+
+        cur_paragraph += 1;
+        *(cur_paragraph) = '*';
+
+        cur_paragraph += 2;
+
+        return 0;
+    }
 }
 // int all_to_lower(word_t word)
 // {

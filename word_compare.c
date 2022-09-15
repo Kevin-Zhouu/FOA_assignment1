@@ -113,9 +113,9 @@ int word_compare(word_t keyword, word_t word_a);
 int main(int argc, char *argv[])
 {
 
-    char keyword[] = "feet";
+    char keyword[5] = "feet";
 
-    char word[] = "feet.";
+    char word[5] = "feet,";
     int result = word_compare(keyword, word);
     printf("is keyword: %d\n", result);
 
@@ -140,14 +140,20 @@ int word_compare(word_t keyword, word_t word_a)
         }
     }
     // Case 2: if the last char is non-alphanumerical
-    printf("last char:%c\n", *(word_a + strlen(word_a) - 1));
-    printf("result:%d", strncasecmp(keyword, word_a, strlen_word - 1) == 0);
-    if (!isalnum(*(word_a + strlen(word_a) - 1)))
+    // printf("last char:%c\n", *(word_a + strlen(word_a) - 1));
+    // printf("comparing: keyword: %s\n with %s ", word_a,);
+    // printf("compare result:%d", strncasecmp(keyword, word_a, strlen_keyword) == 0);
+    if (strlen_word == strlen_keyword + 1)
     {
-        int result = (strncasecmp(keyword, word_a, strlen_word - 1) == 0);
-        if (result == 0)
+        if (!isalnum(*(word_a + strlen(word_a) - 1)))
         {
-            is_keyword = TRUE;
+            printf("punchation!");
+            int result = strncasecmp(keyword, word_a, strlen_keyword);
+            printf("result!,%d", result);
+            if (result == 0)
+            {
+                is_keyword = TRUE;
+            }
         }
     }
     return is_keyword;
